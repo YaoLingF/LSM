@@ -1,0 +1,10 @@
+CompileFlags:
+  Add:
+    - "-std=c++17"
+
+    # xmake 第三方包 include（用 -isystem）
+    - "-isystem//home/ylf/.xmake/packages/s/spdlog/v1.16.0/682a959367074d10b542f367ee9aa523/include"
+    - "-isystem/home/ylf/.xmake/packages/t/toml11/v4.4.0/d9b5d9555a9849b0a8e5714c4e66d566/include"
+    - "-isystem/home/ylf/.xmake/packages/p/pybind11/v3.0.1/8f5d512d4fdb4713bf705395b25be885/include"
+    - "-isystem/home/ylf/.xmake/packages/m/muduo/2022.11.01/e9382a25649e4e43bf04f01f925d9c2f/include"
+    - "-isystem/home/ylf/.xmake/packages/g/gtest/v1.17.0/fe669f042f444a6cb3a06c810a609640/include"
