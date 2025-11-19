@@ -1,5 +1,5 @@
 -- 定义项目
-set_project("toni-lsm")
+set_project("ylf-lsm")
 set_version("0.0.1")
 set_languages("c++20")
 
@@ -19,6 +19,11 @@ target("logger")
     add_packages("spdlog")
     add_includedirs("include", {public = true})
     
+target("config")
+    set_kind("static")  -- 生成静态库
+    add_files("src/config/*.cpp")
+    add_packages("toml11", "spdlog")
+    add_includedirs("include", {public = true})
 
 target("iterator")
     set_kind("static")  -- 生成静态库
@@ -32,6 +37,15 @@ target("skiplist")
     add_packages("toml11", "spdlog")
     add_includedirs("include", {public = true})
 
+    
+target("memtable")
+    set_kind("static")  -- 生成静态库
+    add_deps("skiplist","iterator", "config")
+    --add_deps("sst")
+    add_packages("toml11", "spdlog")
+    add_files("src/memtable/*.cpp")
+    add_includedirs("include", {public = true})
+
 
 target("test_skiplist")
     set_kind("binary")  -- 生成可执行文件
@@ -40,3 +54,12 @@ target("test_skiplist")
     add_deps("logger", "skiplist")  -- 依赖skiplist库
     add_packages("gtest")  -- 添加gtest包
     add_packages("toml11", "spdlog")
+
+target("test_memtable")
+    set_kind("binary")
+    set_group("tests")
+    add_files("test/test_memtable.cpp")
+    add_deps("logger", "memtable")  -- 如果memtable是独立的target，这里需要添加对应的依赖
+    add_packages("gtest")
+    add_packages("toml11", "spdlog")
+    add_includedirs("include")
