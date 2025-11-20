@@ -78,3 +78,13 @@ target("test_block")
     add_packages("gtest")
     add_packages("toml11", "spdlog")
     add_includedirs("include")
+
+
+target("test_blockmeta")
+    set_kind("binary")
+    set_group("tests")
+    add_files("test/test_blockmeta.cpp")
+    add_deps("logger", "block")  -- 如果memtable是独立的target，这里需要添加对应的依赖
+    add_packages("gtest")
+    add_packages("toml11", "spdlog")
+    add_includedirs("include")
